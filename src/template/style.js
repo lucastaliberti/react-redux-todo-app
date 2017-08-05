@@ -8,5 +8,13 @@ export default StyleSheet.create({
   markedAsDone: {
     textDecoration: 'line-through',
     color: 'grey'
+  },
+
+  formActions: {
+    width: '105px'
+  },
+
+  formPadding: {
+    paddingBottom: '60px'
   }
 })

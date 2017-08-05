@@ -1,10 +1,21 @@
 import React from 'react'
 import {Col, FormControl} from 'react-bootstrap'
-import IconButton from '../template/IconButton'
+import {css} from 'aphrodite'
 
-const TodoForm = ({description, handleChange, handleAdd}) => {
+import IconButton from '../template/IconButton'
+import style from '../template/style'
+
+const TodoForm = props => {
+  const {
+    description,
+    handleChange,
+    handleAdd,
+    handleSearch,
+    handleClear
+  } = props
+
   return (
-    <div role='form' className='todo-form'>
+    <div role='form' className={css(style.formPadding)}>
       <Col xs={12} sm={9} md={10}>
         <FormControl
           id='description'

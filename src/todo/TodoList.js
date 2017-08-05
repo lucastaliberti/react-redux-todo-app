@@ -4,7 +4,7 @@ import {defaultProps} from 'recompose'
 import {css} from 'aphrodite'
 
 import IconButton from '../template/IconButton'
-import style from './style'
+import style from '../template/style'
 
 const TodoList = props => {
   const {
@@ -19,11 +19,9 @@ const TodoList = props => {
       <td>
         <IconButton type='success' icon='check'
           hide={todo.done}
-          className={css(style.button)}
           onClick={() => handleMarkAsDone(todo)} />
         <IconButton type='warning' icon='undo'
           hide={!todo.done}
-          className={css(style.button)}
           onClick={() => handleMarkAsPending(todo)} />
         <IconButton type='danger' icon='trash-o'
           hide={!todo.done}
@@ -36,7 +34,7 @@ const TodoList = props => {
       <thead>
         <tr>
           <th>Descrição</th>
-          <th>Ações</th>
+          <th className={css(style.formActions)}>Ações</th>
         </tr>
       </thead>
       <tbody>
