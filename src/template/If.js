@@ -1,3 +1,9 @@
-const If = (props) => props.test ? props.children : false
+import {branch, renderNothing} from 'recompose'
+
+const If = test =>
+  branch(
+    test,
+    renderNothing
+  )
 
 export default If

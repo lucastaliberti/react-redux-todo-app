@@ -4,12 +4,10 @@ import FontAwesome from 'react-fontawesome'
 
 import If from './If'
 
-const IconButton = (props) => (
-  <If test={!props.hide}>
-    <Button bsStyle={props.style}>
-      <FontAwesome name={props.icon} />
-    </Button>
-  </If>
+const IconButton = ({type, icon}) => (
+  <Button bsStyle={type}>
+    <FontAwesome name={icon} />
+  </Button>
 )
 
-export default IconButton
+export default If(({hide}) => hide)(IconButton)
