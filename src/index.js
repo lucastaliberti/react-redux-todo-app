@@ -1,18 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter } from 'react-router-dom'
-import { createStore } from 'redux'
-import { devToolsEnhancer } from 'redux-devtools-extension'
+import { applyMiddleware, createStore } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import { Provider } from 'react-redux'
-import 'bootstrap/dist/css/bootstrap.css'
 
+import promise from 'redux-promise'
+import multi from 'redux-multi'
+import thunk from 'redux-thunk'
+
+import 'bootstrap/dist/css/bootstrap.css'
 import 'font-awesome/css/font-awesome.css'
 
 import App from './app/App'
 import reducers from './app/reducers'
 import registerServiceWorker from './registerServiceWorker'
 
-const store = createStore(reducers, devToolsEnhancer())
+const store = createStore(reducers, composeWithDevTools(
+  applyMiddleware(thunk, multi, promise)
+))
 
 const AppToRender = () => (
   <Provider store={store}>
