@@ -27,6 +27,8 @@ const TodoForm = props => {
       </Col>
       <Col xs={12} sm={3} md={2} >
         <IconButton type='primary' icon='plus' onClick={handleAdd} />
+        <IconButton type='info' icon='search' onClick={handleSearch} />
+        <IconButton type='default' icon='close' onClick={handleClear} />
       </Col>
     </div>
   )

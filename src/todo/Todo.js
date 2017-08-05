@@ -17,7 +17,9 @@ const Todo = props => {
       handleAdd,
       handleRemove,
       handleMarkAsDone,
-      handleMarkAsPending
+      handleMarkAsPending,
+      handleSearch,
+      handleClear
     } = props
 
   return (
@@ -25,6 +27,8 @@ const Todo = props => {
       <PageHeader name='Tarefas' small='Cadastro' />
       <TodoForm
         handleAdd={handleAdd}
+        handleSearch={handleSearch}
+        handleClear={handleClear}
         description={description}
         handleChange={handleChange} />
       <TodoList
@@ -40,10 +44,11 @@ const enhance = compose(
   withState('description', 'setDescription', ''),
   withState('list', 'setList', []),
   withHandlers({
-    refresh: ({setDescription, setList}) => () => {
-      axios.get(`${URL}?sort=-createdAt`)
+    refresh: ({setDescription, setList}) => (description = '') => {
+      const search = description ? `&description__regex=/${description}/i` : ''
+      axios.get(`${URL}?sort=-createdAt${search}`)
         .then(resp => {
-          setDescription('')
+          setDescription(description)
           setList(resp.data)
         })
     }
@@ -53,17 +58,23 @@ const enhance = compose(
       axios.post(URL, {description})
         .then(resp => refresh())
     },
-    handleRemove: ({refresh}) => (_id) => {
+    handleRemove: ({description, refresh}) => (_id) => {
       axios.delete(`${URL}/${_id}`)
-        .then(resp => refresh())
+        .then(resp => refresh(description))
     },
-    handleMarkAsDone: ({refresh}) => (todo) => {
+    handleMarkAsDone: ({description, refresh}) => (todo) => {
       axios.put(`${URL}/${todo._id}`, {...todo, done: true})
-        .then(resp => refresh())
+        .then(resp => refresh(description))
     },
-    handleMarkAsPending: ({refresh}) => (todo) => {
+    handleMarkAsPending: ({description, refresh}) => (todo) => {
       axios.put(`${URL}/${todo._id}`, {...todo, done: false})
-        .then(resp => refresh())
+        .then(resp => refresh(description))
+    },
+    handleSearch: ({description, refresh}) => () => {
+      refresh(description)
+    },
+    handleClear: ({refresh}) => () => {
+      refresh()
     },
     handleChange: ({setDescription}) => e => setDescription(e.target.value)
   }),
