@@ -1,11 +1,15 @@
-import React, {Component} from 'react'
+import React from 'react'
 
-export default class Todo extends Component {
-  render () {
-    return (
-      <div>
-        <h1>Todo</h1>
-      </div>
-    )
-  }
-}
+import PageHeader from '../template/PageHeader'
+import TodoForm from './TodoForm'
+import TodoList from './TodoList'
+
+const Todo = props => (
+  <div>
+    <PageHeader name='Tarefas' small='Cadastro' />
+    <TodoForm />
+    <TodoList />
+  </div>
+)
+
+export default Todo
