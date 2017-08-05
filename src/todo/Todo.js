@@ -9,18 +9,32 @@ import {compose, withState, withHandlers, lifecycle} from 'recompose'
 
 const URL = 'http://localhost:3003/api/todos'
 
-const Todo = ({description, list, handleChange, handleAdd, handleRemove}) => (
-  <div>
-    <PageHeader name='Tarefas' small='Cadastro' />
-    <TodoForm
-      handleAdd={handleAdd}
-      description={description}
-      handleChange={handleChange} />
-    <TodoList
-      list={list}
-      handleRemove={handleRemove} />
-  </div>
-)
+const Todo = props => {
+  const {
+      description,
+      list,
+      handleChange,
+      handleAdd,
+      handleRemove,
+      handleMarkAsDone,
+      handleMarkAsPending
+    } = props
+
+  return (
+    <div>
+      <PageHeader name='Tarefas' small='Cadastro' />
+      <TodoForm
+        handleAdd={handleAdd}
+        description={description}
+        handleChange={handleChange} />
+      <TodoList
+        list={list}
+        handleMarkAsDone={handleMarkAsDone}
+        handleMarkAsPending={handleMarkAsPending}
+        handleRemove={handleRemove} />
+    </div>
+  )
+}
 
 const enhance = compose(
   withState('description', 'setDescription', ''),
@@ -41,6 +55,14 @@ const enhance = compose(
     },
     handleRemove: ({refresh}) => (_id) => {
       axios.delete(`${URL}/${_id}`)
+        .then(resp => refresh())
+    },
+    handleMarkAsDone: ({refresh}) => (todo) => {
+      axios.put(`${URL}/${todo._id}`, {...todo, done: true})
+        .then(resp => refresh())
+    },
+    handleMarkAsPending: ({refresh}) => (todo) => {
+      axios.put(`${URL}/${todo._id}`, {...todo, done: false})
         .then(resp => refresh())
     },
     handleChange: ({setDescription}) => e => setDescription(e.target.value)
