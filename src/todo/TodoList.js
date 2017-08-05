@@ -1,17 +1,22 @@
 import React from 'react'
 import {Table} from 'react-bootstrap'
-import {defaultProps} from 'recompose'
+import {compose, defaultProps} from 'recompose'
 import {css} from 'aphrodite'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
 
 import IconButton from '../template/IconButton'
 import style from '../template/style'
 
+import {markAsDone, markAsPending, remove} from './todoActions'
+
 const TodoList = props => {
   const {
     list,
-    handleMarkAsDone,
-    handleMarkAsPending,
-    handleRemove} = props
+    markAsDone,
+    markAsPending,
+    remove
+  } = props
 
   const renderRows = () => list.map((todo) =>
     <tr key={todo._id}>
@@ -19,13 +24,13 @@ const TodoList = props => {
       <td>
         <IconButton type='success' icon='check'
           hide={todo.done}
-          onClick={() => handleMarkAsDone(todo)} />
+          onClick={() => markAsDone(todo)} />
         <IconButton type='warning' icon='undo'
           hide={!todo.done}
-          onClick={() => handleMarkAsPending(todo)} />
+          onClick={() => markAsPending(todo)} />
         <IconButton type='danger' icon='trash-o'
           hide={!todo.done}
-          onClick={() => handleRemove(todo._id)} />
+          onClick={() => remove(todo)} />
       </td>
     </tr>)
 
@@ -44,4 +49,13 @@ const TodoList = props => {
   )
 }
 
-export default defaultProps({list: []})(TodoList)
+const mapStateToProps = state => ({list: state.todo.list})
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({markAsDone, markAsPending, remove}, dispatch)
+
+const enhance = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  defaultProps({list: []})
+)
+
+export default enhance(TodoList)
