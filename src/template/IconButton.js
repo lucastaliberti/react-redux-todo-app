@@ -4,8 +4,8 @@ import FontAwesome from 'react-fontawesome'
 
 import If from './If'
 
-const IconButton = ({type, icon}) => (
-  <Button bsStyle={type}>
+const IconButton = ({type, icon, onClick}) => (
+  <Button bsStyle={type} onClick={onClick}>
     <FontAwesome name={icon} />
   </Button>
 )
