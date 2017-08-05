@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter } from 'react-router-dom'
 import { createStore } from 'redux'
+import { devToolsEnhancer } from 'redux-devtools-extension'
 import { Provider } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.css'
 
@@ -11,7 +12,7 @@ import App from './app/App'
 import reducers from './app/reducers'
 import registerServiceWorker from './registerServiceWorker'
 
-const store = createStore(reducers)
+const store = createStore(reducers, devToolsEnhancer())
 
 const AppToRender = () => (
   <Provider store={store}>
