@@ -14,6 +14,14 @@ const TodoForm = props => {
     handleClear
   } = props
 
+  const keyHandler = (e) => {
+    if (e.key === 'Enter') {
+      e.shiftKey ? handleSearch() : handleAdd()
+    } else if (e.key === 'Escape') {
+      handleClear()
+    }
+  }
+
   return (
     <div role='form' className={css(style.formPadding)}>
       <Col xs={12} sm={9} md={10}>
@@ -21,6 +29,7 @@ const TodoForm = props => {
           id='description'
           type='text'
           placeholder='Adicionar tarefa'
+          onKeyUp={keyHandler}
           onChange={handleChange}
           value={description}
           />
