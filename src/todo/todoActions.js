@@ -1,9 +1,15 @@
 import axios from 'axios'
+import {
+   TODO_DESCRIPTION_CHANGED
+  , TODO_SEARCHED
+  , TODO_CLEAR
+}
+from './todoReducer'
 
 export const URL = 'http://localhost:3003/api/todos'
 
 export const changeDescription = event => ({
-  type: 'TODO/DESCRIPTION_CHANGED',
+  type: TODO_DESCRIPTION_CHANGED,
   payload: event.target.value
 })
 
@@ -12,7 +18,7 @@ export const search = () => (dispatch, getState) => {
   const search = description ? `&description__regex=/${description}/i` : ''
 
   axios.get(`${URL}?sort=-createdAt${search}`)
-    .then(resp => dispatch({type: 'TODO/TODO_SEARCHED', payload: resp.data}))
+    .then(resp => dispatch({type: TODO_SEARCHED, payload: resp.data}))
 }
 
 export const add = description => dispatch => {
@@ -37,5 +43,5 @@ export const remove = todo => dispatch => {
 }
 
 export const clear = () => (
-  [{type: 'TODO/TODO_CLEAR'}, search()]
+  [{type: TODO_CLEAR}, search()]
 )
