@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL = 'http://localhost:3003/api/todos'
+export const URL = 'http://localhost:3003/api/todos'
 
 export const changeDescription = event => ({
   type: 'TODO/DESCRIPTION_CHANGED',
