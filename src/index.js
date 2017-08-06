@@ -5,8 +5,6 @@ import { applyMiddleware, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { Provider } from 'react-redux'
 
-import promise from 'redux-promise'
-import multi from 'redux-multi'
 import thunk from 'redux-thunk'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -17,7 +15,7 @@ import reducers from './app/reducers'
 import registerServiceWorker from './registerServiceWorker'
 
 const store = createStore(reducers, composeWithDevTools(
-  applyMiddleware(thunk, multi, promise)
+  applyMiddleware(thunk)
 ))
 
 const AppToRender = () => (
