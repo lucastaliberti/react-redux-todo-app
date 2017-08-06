@@ -1,6 +1,3 @@
-import axios from 'axios'
-import MockAdapter from 'axios-mock-adapter'
-
 import systemUnderTest, {
   INITIAL_STATE
   , TODO_DESCRIPTION_CHANGED
@@ -9,7 +6,6 @@ import systemUnderTest, {
 }
 from '../todoReducer'
 
-const mock = new MockAdapter(axios)
 const mockData = {
   description: 'estudar testes',
   list: [
@@ -23,9 +19,7 @@ const mockData = {
   ]
 }
 
-mock.onGet().reply(200, mockData.list)
-
-describe('TodoActions', () => {
+describe('TodoReducer', () => {
   let state
 
   beforeEach(() => {
