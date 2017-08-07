@@ -47,8 +47,8 @@ const TodoForm = props => {
   )
 }
 
-const mapStateToProps = state => ({description: state.todo.description})
-const mapDispatchToProps = dispatch =>
+export const mapStateToProps = state => ({description: state.todo.description})
+export const mapDispatchToProps = dispatch =>
   bindActionCreators({changeDescription, search, add, clear}, dispatch)
 
 const enhance = compose(
@@ -59,5 +59,5 @@ const enhance = compose(
     }
   })
 )
-
+export {TodoForm}
 export default enhance(TodoForm)
