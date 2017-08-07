@@ -49,7 +49,7 @@ const TodoList = props => {
   )
 }
 
-const mapStateToProps = state => ({list: state.todo.list})
+export const mapStateToProps = state => ({list: state.todo.list})
 const mapDispatchToProps = dispatch =>
   bindActionCreators({markAsDone, markAsPending, remove}, dispatch)
 
@@ -58,4 +58,5 @@ const enhance = compose(
   defaultProps({list: []})
 )
 
+export {TodoList}
 export default enhance(TodoList)
