@@ -3,7 +3,7 @@ import React from 'react'
 import {shallow} from 'enzyme'
 import {StyleSheetTestUtils} from 'aphrodite'
 
-import {TodoForm} from '../TodoForm'
+import {TodoForm, mapStateToProps} from '../TodoForm'
 
 import IconButton from '../../template/IconButton'
 
@@ -51,6 +51,11 @@ describe('TODO Form Component', () => {
     StyleSheetTestUtils.clearBufferAndResumeStyleInjection()
   })
 
+  it('Should mapStateToProps correctly', () => {
+    const description = storeStateMock.todo.description
+    expect(mapStateToProps(storeStateMock)).toEqual({description})
+  })
+
   it('Should have a div wrapping all', () => {
     expect(wrapper.find('div')).toHaveLength(1)
   })
@@ -68,6 +73,23 @@ describe('TODO Form Component', () => {
 
     formControlProps.onChange('')
     expect(props.changeDescription.mock.calls.length).toBe(1)
+  })
+
+  it('FormControl should dispatch events on keyUp', () => {
+    const formControl = wrapper.find('FormControl')
+
+    const addEvent = { key: 'Enter', shiftKey: false }
+    const searchEvent = { key: 'Enter', shiftKey: true }
+    const clearEvent = { key: 'Escape' }
+
+    formControl.simulate('keyUp', addEvent)
+    expect(props.add.mock.calls.length).toBe(1)
+
+    formControl.simulate('keyUp', searchEvent)
+    expect(props.search.mock.calls.length).toBe(1)
+
+    formControl.simulate('keyUp', clearEvent)
+    expect(props.clear.mock.calls.length).toBe(1)
   })
 
   it('Should render 3 IconButton', () => {
