@@ -1,5 +1,15 @@
 const BillingCycle = require('./schema')
 
+const {
+  defaultErrorHandler,
+  defaultResultHandler,
+  aggregateResultHandler,
+  makeCallBackHandler,
+  projectValues,
+  groupByNull,
+  projectResultFields
+} = require('./handlers')
+
 BillingCycle.methods(['get', 'post', 'put', 'delete'])
 BillingCycle.updateOptions({
   new: true,
@@ -7,13 +17,25 @@ BillingCycle.updateOptions({
 })
 
 BillingCycle.route('count', (req, res, next) => {
-  BillingCycle.count((error, value) => {
-    if (error)
-      res.status(500).json({
-        errors: [error]
-      })
-    else res.json({ value })
-  })
+  const countCallBackHandler = makeCallBackHandler(req, res, next)(
+    defaultErrorHandler,
+    defaultResultHandler
+  )
+  BillingCycle.count(countCallBackHandler)
+})
+
+BillingCycle.route('summary', (req, res, next) => {
+  const summaryCallBackHandler = makeCallBackHandler(req, res, next)(
+    defaultErrorHandler,
+    aggregateResultHandler
+  )
+
+  BillingCycle.aggregate(
+    projectValues(),
+    groupByNull(),
+    projectResultFields(),
+    summaryCallBackHandler
+  )
 })
 
 module.exports = BillingCycle
