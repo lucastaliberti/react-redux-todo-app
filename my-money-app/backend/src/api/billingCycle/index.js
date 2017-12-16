@@ -1,5 +1,5 @@
 const BillingCycle = require('./schema')
-
+const errorHandler = require('../common/errorHandler')
 const {
   defaultErrorHandler,
   defaultResultHandler,
@@ -15,6 +15,7 @@ BillingCycle.updateOptions({
   new: true,
   runValidators: true
 })
+BillingCycle.after('post', errorHandler).after('put', errorHandler)
 
 BillingCycle.route('count', (req, res, next) => {
   const countCallBackHandler = makeCallBackHandler(req, res, next)(
