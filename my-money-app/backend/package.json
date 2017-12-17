@@ -6,10 +6,12 @@
   "scripts": {
     "dev": "nodemon",
     "prod": "pm2 start src/loader.js --name my-money-backend",
+    "monit": "pm2 monit",
     "lint": "prettier --write 'src/**/*.{js,jsx,json,css}'"
   },
   "keywords": [],
-  "author": "Lucas Taliberti <lucastaliberti@syllus.com.br> (https://github.com/lucastaliberti)",
+  "author":
+    "Lucas Taliberti <lucastaliberti@syllus.com.br> (https://github.com/lucastaliberti)",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
