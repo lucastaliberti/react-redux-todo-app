@@ -1,12 +1,13 @@
-import React, { Component } from 'react'
-import logo from '../logo.svg'
+import React from 'react'
+//import logo from '../logo.svg'
+import { Layout } from 'reactjs-admin-lte'
 import './index.css'
+import Header from '../components/Header'
 
-const App = () => (
-  <div className="wrapper">
-    <img src={logo} className="App-logo" alt="logo" />
-    <h1>App</h1>
-  </div>
+const App = props => (
+  <Layout skin="blue" type="fixed">
+    <Header />
+  </Layout>
 )
 
 export default App
