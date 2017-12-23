@@ -1,6 +1,5 @@
 import React from 'react'
 import { MainHeader } from 'reactjs-admin-lte'
-import MainHeaderLargeLogo from 'reactjs-admin-lte/lib/MainHeader/MainHeaderLargeLogo'
 
 const Header = props => (
   <MainHeader>
@@ -13,7 +12,9 @@ const Header = props => (
         <b>My</b>M
       </MainHeader.Logo.Mini>
     </MainHeader.Logo>
-    <MainHeader.SidebarToggle />
+    <MainHeader.Navbar>
+      <MainHeader.SidebarToggle />
+    </MainHeader.Navbar>
   </MainHeader>
 )
 
