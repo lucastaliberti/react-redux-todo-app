@@ -8,6 +8,10 @@
 
 @import '~ionicons/dist/css/ionicons.min.css';
 
+#root {
+  height: 100%;
+}
+
 .App {
   text-align: center;
 }
