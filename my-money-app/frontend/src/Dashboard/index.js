@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Content } from 'reactjs-admin-lte'
-import { Grid, Row, Col } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 
 import InfoBox from '../components/InfoBox'
 
