@@ -12,6 +12,10 @@
   height: 100%;
 }
 
+.skin-blue .sidebar-menu > li > a.active {
+  border-left-color: #3c8dbc;
+}
+
 .App {
   text-align: center;
 }
