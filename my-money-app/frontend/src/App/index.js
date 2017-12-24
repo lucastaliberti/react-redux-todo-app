@@ -1,6 +1,6 @@
 import React from 'react'
 //import logo from '../logo.svg'
-import { Layout, Content } from 'reactjs-admin-lte'
+import { Layout } from 'reactjs-admin-lte'
 import { HashRouter as Router } from 'react-router-dom'
 import './index.css'
 import Header from '../components/Header'
@@ -12,11 +12,7 @@ import Routes from './routes'
 const App = props => (
   <Layout skin="blue" type="fixed">
     <Header />
-    <Content>
-      <Content.Body>
-        <Routes />
-      </Content.Body>
-    </Content>
+    <Routes />
     <Sidebar />
     <Footer />
   </Layout>
