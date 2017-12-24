@@ -1,17 +1,20 @@
 import React from 'react'
 //import logo from '../logo.svg'
 import { Layout, Content } from 'reactjs-admin-lte'
+import { BrowserRouter as Router } from 'react-router-dom'
 import './index.css'
 import Header from '../components/Header'
 import Sidebar from '../components/Sidebar'
 import Footer from '../components/Footer'
+
+import Routes from './routes'
 
 const App = props => (
   <Layout skin="blue" type="fixed">
     <Header />
     <Content>
       <Content.Body>
-        <h1>Conteúdo</h1>
+        <Routes />
       </Content.Body>
     </Content>
     <Sidebar />
@@ -19,4 +22,10 @@ const App = props => (
   </Layout>
 )
 
-export default App
+const AppRouted = props => (
+  <Router>
+    <App {...props} />
+  </Router>
+)
+
+export default AppRouted

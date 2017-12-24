@@ -6,13 +6,13 @@ import MenuItem from './MenuItem'
 
 const Menu = () => (
   <MainSidebar.Menu>
-    <MenuItem slug="" icon="dashboard">
+    <MenuItem slug="/dashboard" icon="dashboard">
       Dashboard
     </MenuItem>
     <MainSidebar.Menu.Header>
       <FontAwesome name="edit" /> Cadastro
     </MainSidebar.Menu.Header>
-    <MenuItem slug="billingCycles" icon="usd">
+    <MenuItem slug="/billingCycle" icon="usd">
       Ciclos de pagamentos
     </MenuItem>
   </MainSidebar.Menu>

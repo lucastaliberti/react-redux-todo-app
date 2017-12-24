@@ -1,10 +1,14 @@
 import React from 'react'
-import { MainSidebar } from 'reactjs-admin-lte'
+import FontAwesome from 'react-fontawesome'
+import { NavLink } from 'react-router-dom'
 
 const MenuItem = ({ index, slug, icon, children }) => (
-  <MainSidebar.Menu.Item href={`#${slug}`} iconName={`${icon}`} key={index}>
-    {children}
-  </MainSidebar.Menu.Item>
+  <li>
+    <NavLink to={`${slug}`}>
+      <FontAwesome name={`${icon}`} tag="i" />
+      {children}
+    </NavLink>
+  </li>
 )
 
 export default MenuItem
