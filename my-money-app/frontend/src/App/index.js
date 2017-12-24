@@ -1,7 +1,7 @@
 import React from 'react'
 //import logo from '../logo.svg'
 import { Layout, Content } from 'reactjs-admin-lte'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { HashRouter as Router } from 'react-router-dom'
 import './index.css'
 import Header from '../components/Header'
 import Sidebar from '../components/Sidebar'
